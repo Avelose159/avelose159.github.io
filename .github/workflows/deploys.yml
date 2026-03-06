@@ -1,0 +1,22 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # main 브랜치에 코드가 올라올 때마다 실행
+  workflow_dispatch: # 수동으로도 실행 가능하게 설정
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        uses: withastro/action@v2 # Astro 전용 공식 액션 사용
+        # with:
+        #   path: . # 프로젝트가 하위 폴더에 있다면 경로 수정 필요 (예: ./my-blog)
