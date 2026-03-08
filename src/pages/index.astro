@@ -1,5 +1,4 @@
 ---
-// 1. 필요한 핵심 컴포넌트만 직접 가져옵니다.
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -11,7 +10,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			/* 배경 이미지를 위한 스타일 */
+			/* 전역 여백 제거 [cite: 5] */
+			:global(html), :global(body) {
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				max-width: none !important;
+				overflow-x: hidden;
+			}
+			/* 헤더 투명화 설정 [cite: 17] */
 			:global(header) {
 				position: absolute !important;
 				top: 0;
@@ -27,14 +34,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			.hero-section {
 				position: relative;
 				width: 100%;
-				overflow: hidden;
+				height: 100vh;
 				background-color: #000;
 			}
 			.hero-bg {
 				width: 100%;
-				height: auto;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0.6;
+				border-radius: 0 !important;
 				display: block;
-				opacity: 0.6; /* 글자가 잘 보이도록 배경을 어둡게 합니다. */
 			}
 			.hero-content {
 				position: absolute;
@@ -63,12 +72,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header />
 		<section class="hero-section">
 			<img src="/bg-hero.jpg" alt="배경 이미지" class="hero-bg" />
-			
 			<div class="hero-content">
-				<h1 class="motto">
-					Don't Think<br/>Just Do.
-				</h1>
-				<p style="margin-top: 1.5rem; font-size: 1.25rem; opacity: 0.8; letter-spacing: 0.2em; color: white;">
+				<h1 class="motto">Don't Think<br/>Just Do.</h1>
+				<p style="margin-top: 1.5rem; font-size: 1.25rem; opacity: 0.8; letter-spacing: 0.2em;">
 					GAME DEVELOPER • AVELOSE159
 				</p>
 			</div>
