@@ -42,7 +42,7 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 1.7;
 	display: flex;
 	flex-direction: column;
@@ -63,29 +63,39 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: white;
 	line-height: 1.2;
 }
 
 h1 {
-	font-size: 3.052em;
+	font-size: 2.2em;
+	/* 기존: 3.052em */
 }
 
 h2 {
-	font-size: 2.441em;
+	font-size: 1.8em;
+	/* 기존: 2.441em */
 }
 
 h3 {
-	font-size: 1.953em;
+	font-size: 1.5em;
+	/* 기존: 1.953em */
 }
 
 h4 {
-	font-size: 1.563em;
+	font-size: 1.25em;
+	/* 기존: 1.563em */
 }
 
 h5 {
-	font-size: 1.25em;
+	font-size: 1.1em;
+	/* 기존: 1.25em */
 }
+
+h6 {
+	color: #cfcfcfff !important;
+}
+
 
 strong,
 b {
@@ -127,21 +137,6 @@ img {
 	border-radius: 8px;
 }
 
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-
-pre>code {
-	all: unset;
-}
-
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
@@ -180,4 +175,132 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* 코드 블록 컨테이너 스타일 */
+pre {
+	padding: 1rem;
+	border-radius: 12px;
+	background-color: rgba(17, 17, 17, 0.8) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 255, 0.05);
+	overflow-x: auto;
+	margin: 1rem 0;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 마우스 호버 시 강조 효과 */
+pre:hover {
+	border-color: rgba(169, 169, 169, 0.5);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 255, 255, 0.15);
+}
+
+/* 코드 텍스트 폰트 설정 */
+code {
+	font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+	font-size: 14px;
+	line-height: 1.5;
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
+
+/* 인라인 코드 스타일 (문장 중간에 나오는 코드) */
+:not(pre)>code {
+	padding: 0.2rem 0.4rem;
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.1);
+	color: #c9c9c9;
+	font-size: 0.9em;
+}
+
+/* Astro/Shiki가 생성하는 특정 클래스를 활용한 예시 */
+pre::before {
+	content: attr(data-language);
+	/* 실제 작동을 위해선 자바스크립트나 추가 설정이 필요할 수 있습니다 */
+	display: block;
+	text-align: right;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.3);
+	margin-bottom: 0.5rem;
+}
+
+/* Dark Theme Base (CODING & STAR KEEPER) */
+body.theme-coding,
+body.theme-star-keeper {
+	background: #000000ff !important;
+	color: #ffffffff !important;
+}
+
+body.theme-coding header,
+body.theme-star-keeper header {
+	background: #000 !important;
+	box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+body.theme-coding nav a,
+body.theme-coding h2 a,
+body.theme-coding h2 a.active,
+body.theme-star-keeper nav a,
+body.theme-star-keeper h2 a,
+body.theme-star-keeper h2 a.active {
+	color: #fff !important;
+}
+
+body.theme-coding footer,
+body.theme-star-keeper footer {
+	background: #000 !important;
+	color: #ccc !important;
+}
+
+body.theme-coding .social-links a,
+body.theme-star-keeper .social-links a {
+	color: #ccc !important;
+}
+
+body.theme-coding .social-links a:hover,
+body.theme-star-keeper .social-links a:hover {
+	color: #fff !important;
+}
+
+body.theme-coding hr,
+body.theme-star-keeper hr {
+	border-top: 1px solid #333 !important;
+}
+
+/* STAR KEEPER specific typography color */
+body.theme-star-keeper .prose,
+body.theme-star-keeper .prose p,
+body.theme-star-keeper h1,
+body.theme-star-keeper h2,
+body.theme-star-keeper h3,
+body.theme-star-keeper h4,
+body.theme-star-keeper h5,
+body.theme-star-keeper h6,
+body.theme-star-keeper .title,
+body.theme-star-keeper .date,
+body.theme-star-keeper .last-updated-on,
+body.theme-star-keeper strong,
+body.theme-star-keeper b,
+body.theme-star-keeper article {
+	color: rgb(183, 183, 183) !important;
+}
+
+/* CODING specific typography color (원하시는 폰트 색상을 여기에 지정하세요) */
+body.theme-coding .prose,
+body.theme-coding .prose p,
+body.theme-coding h1,
+body.theme-coding h2,
+body.theme-coding h3,
+body.theme-coding h4,
+body.theme-coding h5,
+body.theme-coding h6,
+body.theme-coding .title,
+body.theme-coding .date,
+body.theme-coding .last-updated-on,
+body.theme-coding strong,
+body.theme-coding b,
+body.theme-coding article {
+	color: rgb(211, 211, 211) !important;
+	/* 이 부분의 색상 코드를 변경하시면 됩니다 */
 }

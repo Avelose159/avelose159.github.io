@@ -11,7 +11,6 @@ author: "avelose159"
 프로젝트, **STAR KEEPER: The Architect of Starlight**를 소개합니다.
 
 ---
----
 
 ### 1. 프로젝트 하이 컨셉 (High Concept)
 
@@ -20,7 +19,6 @@ author: "avelose159"
 * **로그라인**: 칠흑 같은 어둠 속에서 고대 드론 '유닛-734'가 되어 별과 별 사이를 잇는 '광자 빔'을 설계하고, 끊어진 별자리를 복구하여 우주의 지도를 다시 그리는 감성 물류 퍼즐 시뮬레이션입니다.
 * **핵심 경험**: 최적의 경로를 설계하는 **공학적 이성**과, 기계적 연결이 아름다운 예술로 변하는 **시청각적 감성**의 조화를 목표로 합니다.
 
----
 ---
 
 ### 2. 핵심 시스템: 빛의 물리 법칙 (Lumen)
@@ -35,7 +33,6 @@ $$CurrentIntensity = StartIntensity - (DistanceTraveled \times DecayFactor)$$
 이 공식을 바탕으로 플레이어는 자원을 효율적으로 관리하며 장애물을 피해 최적의 네트워크를 구축해야 합니다.
 
 ---
----
 
 ### 3. 유니티 6와 시청각적 구현
 
@@ -44,7 +41,6 @@ $$CurrentIntensity = StartIntensity - (DistanceTraveled \times DecayFactor)$$
 * **생성적 오디오**: 단순한 배경음악이 아닙니다. 플레이어가 빔을 연결하고 노드를 설치할 때마다 각기 다른 음계가 발생하여, 완성된 회로 자체가 하나의 **앰비언트 음악**이 됩니다.
 * **천상의 격자**: 평소에는 격자가 보이지 않지만, 마우스 커서를 움직일 때만 좌표에 희미한 별빛이 반응하여 우주 공간을 유영하는 느낌을 줍니다.   
 
----
 ---
 
 ### 4. 오늘의 회고: "Just Do"
@@ -55,32 +51,3 @@ $$CurrentIntensity = StartIntensity - (DistanceTraveled \times DecayFactor)$$
 
 > **"침묵은 끝났다. 별들이 다시 노래한다."**
 
-<style>
-	body {
-		background: #000000ff !important;
-		color: #ffffffff !important;
-	}
-	header {
-		background: #000 !important;
-		box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1) !important;
-	}
-	nav a, h2 a, h2 a.active {
-		color: #fff !important;
-	}
-	footer {
-		background: #000 !important;
-		color: #ccc !important;
-	}
-	.social-links a {
-		color: #ccc !important;
-	}
-	.social-links a:hover {
-		color: #fff !important;
-	}
-	.prose, .prose p, h1, h2, h3, h4, h5, h6, .title, .date, .last-updated-on, strong, b, article {
-		color: #ad6c6cff !important;
-	}
-	hr {
-		border-top: 1px solid #333 !important;
-	}
-</style>

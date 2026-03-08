@@ -11,7 +11,7 @@ const posts = (await getCollection('blog')).sort(
 );
 
 // 카테고리 목록 추출
-const categories = ['STAR KEEPER', 'MENTIST', 'CODING'];
+const categories = ['STAR KEEPER', 'MENTIST', 'CODING', 'MATH'];
 const categoryCounts = categories.reduce((acc, cat) => {
 	acc[cat] = posts.filter((p) => p.data.category === cat).length;
 	return acc;
@@ -27,6 +27,21 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				margin: 0; padding: 0; width: 100%; min-height: 100%;
 				background: #000 url('/space.jpg') center/cover no-repeat fixed;
 				color: white;
+			}
+			/* Custom scrollbar to prevent ugly white bars on Windows */
+			:global(::-webkit-scrollbar) {
+				width: 10px;
+				background: transparent;
+			}
+			:global(::-webkit-scrollbar-track) {
+				background: rgba(0, 0, 0, 0.3);
+			}
+			:global(::-webkit-scrollbar-thumb) {
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 5px;
+			}
+			:global(::-webkit-scrollbar-thumb:hover) {
+				background: rgba(255, 255, 255, 0.4);
 			}
 			:global(header) {
 				background: #000 !important;
@@ -92,7 +107,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
 			/* 우측 포스트 목록 */
 			.posts {
 				flex: 1;
-				max-width: 800px;
+				max-width: 1000px;
 			}
 			.posts ul {
 				display: grid;
@@ -102,7 +117,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				margin: 0;
 				padding: 0;
 			}
-			.posts ul li a { 
+			.posts ul li .post-header { 
 				display: block; 
 				text-decoration: none; 
 				padding: 1rem;
@@ -110,8 +125,9 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				border-radius: 16px;
 				background: rgba(0, 0, 0, 0.3); /* 살짝 어두운 배경 */
 				transition: all 0.3s ease;
+                cursor: pointer;
 			}
-			.posts ul li a:hover {
+			.posts ul li .post-header:hover {
 				background: rgba(255, 255, 255, 0.05);
 				border-color: rgba(255, 255, 255, 0.4);
 				transform: translateY(-4px);
@@ -123,7 +139,36 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				border: 1px solid rgba(255, 255, 255, 0.1);
 				transition: all 0.4s ease;
 			}
-			.title { margin: 0.5rem 0; color: #fff; font-size: 1.3rem; font-weight: 700; }
+            .post-header .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0.5rem 0 0 0; 
+                color: #fff; 
+                font-size: 1.3rem; 
+                font-weight: 700;
+            }
+            .toggle-icon {
+                font-size: 0.9rem;
+                color: rgba(255,255,255,0.5);
+                transition: transform 0.3s ease;
+            }
+            .post-header.open .toggle-icon {
+                transform: rotate(180deg);
+            }
+            .click-hint {
+                font-size: 0.85rem;
+                color: rgba(255,255,255,0.3);
+                margin-top: 0.5rem;
+                display: block;
+                transition: color 0.3s ease;
+            }
+            .post-header:hover .click-hint {
+                color: rgba(255,255,255,0.8);
+            }
+            .post-header.open .click-hint {
+                display: none;
+            }
 			.date { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); }
 			.category-tag {
 				display: inline-block;
@@ -134,6 +179,58 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				color: rgba(255, 255, 255, 0.6);
 				margin-bottom: 0.3rem;
 			}
+            .post-content-container {
+                display: none;
+                margin-top: 1rem;
+                padding: 1.5rem;
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 12px;
+                background: rgba(0,0,0,0.5);
+                color: #e5e9f0;
+            }
+            .post-content-container.expanded {
+                display: block;
+                animation: fadeIn 0.3s ease-out forwards;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .loading-spinner {
+                text-align: center;
+                padding: 2rem;
+                color: rgba(255,255,255,0.6);
+            }
+            .loading-spinner::after {
+                content: "...";
+                animation: ellipsis steps(4,end) 1.5s infinite;
+            }
+            @keyframes ellipsis {
+                0% { content: ""; }
+                25% { content: "."; }
+                50% { content: ".."; }
+                75% { content: "..."; }
+                100% { content: ""; }
+            }
+            .close-article-btn {
+                display: block;
+                width: 100%;
+                margin-top: 2rem;
+                padding: 1rem;
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+                color: rgba(255,255,255,0.8);
+                border-radius: 8px;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-align: center;
+            }
+            .close-article-btn:hover {
+                background: rgba(255,255,255,0.1);
+                border-color: rgba(255,255,255,0.3);
+                color: #fff;
+            }
 			@media (max-width: 768px) {
 				main { flex-direction: column; padding-top: 5rem; }
 				.sidebar {
@@ -155,9 +252,12 @@ const categoryCounts = categories.reduce((acc, cat) => {
 			<aside class="sidebar">
 				<h3>📂 카테고리</h3>
 				<ul>
-					<li><button class="category-btn active" data-category="all">전체 ({posts.length})</button></li>
-					{categories.map((cat) => (
-						<li><button class="category-btn" data-category={cat}>{cat} ({categoryCounts[cat]})</button></li>
+					{categories.map((cat, index) => (
+						<li>
+							<button class={`category-btn ${index === 0 ? 'active' : ''}`} data-category={cat}>
+								{cat} ({categoryCounts[cat] || 0})
+							</button>
+						</li>
 					))}
 				</ul>
 			</aside>
@@ -165,15 +265,20 @@ const categoryCounts = categories.reduce((acc, cat) => {
 				<ul>
 					{
 						posts.map((post) => (
-							<li data-category={post.data.category}>
-								<a href={`/blog/${post.id}/`}>
+							<li data-category={post.data.category} style={post.data.category !== categories[0] ? 'display: none;' : ''}>
+								<div class="post-header" data-href={`/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<img width={720} height={360} src={post.data.heroImage} alt="" />
 									)}
 									<span class="category-tag">{post.data.category}</span>
 									<p class="date"><FormattedDate date={post.data.pubDate} /></p>
-									<h4 class="title">{post.data.title}</h4>
-								</a>
+									<h4 class="title">
+                                        {post.data.title}
+                                        <span class="toggle-icon">▼</span>
+                                    </h4>
+                                    <span class="click-hint">클릭하여 본문 펼쳐보기</span>
+								</div>
+                                <div class="post-content-container"></div>
 							</li>
 						))
 					}
@@ -195,7 +300,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
 						const category = btn.getAttribute('data-category');
 
 						items.forEach(function(item) {
-							if (category === 'all' || item.getAttribute('data-category') === category) {
+							if (item.getAttribute('data-category') === category) {
 								item.style.display = '';
 							} else {
 								item.style.display = 'none';
@@ -206,6 +311,100 @@ const categoryCounts = categories.reduce((acc, cat) => {
 						window.scrollTo({ top: 0, behavior: 'smooth' });
 					});
 				});
+
+                const postHeaders = document.querySelectorAll('.post-header');
+                postHeaders.forEach(function(header) {
+                    header.addEventListener('click', async function(e) {
+                        e.preventDefault();
+                        const contentContainer = header.nextElementSibling;
+                        if (!contentContainer || !contentContainer.classList.contains('post-content-container')) return;
+
+                        const isExpanded = contentContainer.classList.contains('expanded');
+                        
+                        // 클릭 중복 방지: 로딩중이면 무시
+                        if (header.classList.contains('loading')) return;
+
+                        // 다른 열린 아코디언들을 닫는 옵션
+                        document.querySelectorAll('.post-content-container.expanded').forEach(c => {
+                            if (c !== contentContainer) {
+                                c.classList.remove('expanded');
+                                if (c.previousElementSibling && c.previousElementSibling.classList.contains('post-header')) {
+                                    c.previousElementSibling.classList.remove('open');
+                                }
+                            }
+                        });
+
+                        if (!isExpanded) {
+                            // 열기 동작
+                            contentContainer.classList.add('expanded');
+                            header.classList.add('open');
+                            
+                            // 처음 열린 경우에만 데이터를 가져옴
+                            if (contentContainer.innerHTML.trim() === '') {
+                                header.classList.add('loading');
+                                contentContainer.innerHTML = '<div class="loading-spinner">내용을 불러오는 중입니다</div>';
+                                const url = header.getAttribute('data-href');
+                                
+                                try {
+                                    const res = await fetch(url);
+                                    if (!res.ok) throw new Error('Network response was not ok');
+                                    const htmlText = await res.text();
+                                    
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(htmlText, 'text/html');
+                                    const proseNode = doc.querySelector('.prose'); // 원본 페이지 컨텐츠 영역 추출
+                                    
+                                    if (proseNode) {
+                                        // 상세보기 페이지에 있던 제목 등은 리스트에서 이미 보여주므로 삭제
+                                        const titleNode = proseNode.querySelector('.title');
+                                        if (titleNode) titleNode.remove();
+
+                                        contentContainer.innerHTML = ''; 
+                                        
+                                        // 테마를 일치시키기 위해 가져온 페이지 body에 있는 class를 현재 컨테이너로 복사
+                                        // 이때 expanded 속성이 유실되지 않게 합칩니다.
+                                        contentContainer.className = `post-content-container expanded base-theme ${doc.body.className}`;
+                                        contentContainer.appendChild(proseNode);
+
+                                        // 하단 접기 버튼 추가
+                                        const closeBtn = document.createElement('button');
+                                        closeBtn.className = 'close-article-btn';
+                                        closeBtn.innerHTML = '▲ 본문 접기';
+                                        closeBtn.addEventListener('click', (ev) => {
+                                            ev.stopPropagation(); // 이벤트 버블링 방지
+                                            contentContainer.classList.remove('expanded');
+                                            header.classList.remove('open');
+                                            // 닫을 때 포스트 헤더 위치로 스크롤 이동
+                                            header.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                        });
+                                        contentContainer.appendChild(closeBtn);
+
+                                    } else {
+                                        contentContainer.innerHTML = '<p>본문을 찾을 수 없습니다.</p>';
+                                    }
+                                } catch (err) {
+                                    console.error(err);
+                                    contentContainer.innerHTML = '<p>본문을 가져오는 중 오류가 발생했습니다.</p>';
+                                } finally {
+                                    header.classList.remove('loading');
+                                    
+                                    // 로딩 중 아코디언이 닫혔었다면(유저 변심) 다시 숨김
+                                    if (!header.classList.contains('open')) {
+                                        contentContainer.classList.remove('expanded');
+                                    }
+                                }
+                            }
+                            
+                            setTimeout(() => {
+                                header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        } else {
+                            // 닫기 동작
+                            contentContainer.classList.remove('expanded');
+                            header.classList.remove('open');
+                        }
+                    });
+                });
 			})();
 		</script>
 	</body>

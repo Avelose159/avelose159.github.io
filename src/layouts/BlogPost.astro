@@ -8,7 +8,8 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category } = Astro.props;
+const themeClass = category ? `theme-${category.toLowerCase().replace(/\s+/g, '-')}` : '';
 ---
 
 <html lang="en">
@@ -30,7 +31,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
+				width: 900px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
@@ -56,7 +57,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		</style>
 	</head>
 
-	<body>
+	<body class={themeClass}>
 		<Header />
 		<main>
 			<article>

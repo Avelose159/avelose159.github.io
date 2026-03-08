@@ -8,6 +8,10 @@ export default defineConfig({
 		mdx(),
 		sitemap()
 	],
-	// Keystatic을 위한 output: 'static' 혹은 삭제
-	output: 'static',
+	markdown: {
+		shikiConfig: {
+			theme: 'monokai',
+			wrap: true,
+		},
+	},
 });
