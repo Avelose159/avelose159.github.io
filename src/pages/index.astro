@@ -12,6 +12,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			/* 배경 이미지를 위한 스타일 */
+			:global(header) {
+				position: absolute !important;
+				top: 0;
+				left: 0;
+				width: 100%;
+				background: transparent !important;
+				box-shadow: none !important;
+				z-index: 100;
+			}
+			:global(header h2 a), :global(header nav a), :global(header .social-links a) {
+				color: white !important;
+			}
 			.hero-section {
 				position: relative;
 				width: 100%;
@@ -51,20 +63,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section class="hero-section">
-				<img src="/bg-hero.jpg" alt="배경 이미지" class="hero-bg" />
-				
-				<div class="hero-content">
-					<h1 class="motto">
-						Don't Think<br/>Just Do.
-					</h1>
-					<p style="margin-top: 1.5rem; font-size: 1.25rem; opacity: 0.8; letter-spacing: 0.2em;">
-						GAME DEVELOPER • AVELOSE159
-					</p>
-				</div>
-			</section>
-		</main>
+		<section class="hero-section">
+			<img src="/bg-hero.jpg" alt="배경 이미지" class="hero-bg" />
+			
+			<div class="hero-content">
+				<h1 class="motto">
+					Don't Think<br/>Just Do.
+				</h1>
+				<p style="margin-top: 1.5rem; font-size: 1.25rem; opacity: 0.8; letter-spacing: 0.2em;">
+					GAME DEVELOPER • AVELOSE159
+				</p>
+			</div>
+		</section>
 		<Footer />
 	</body>
 </html>
