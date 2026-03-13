@@ -304,3 +304,11 @@ body.theme-coding article {
 	color: rgb(211, 211, 211) !important;
 	/* 이 부분의 색상 코드를 변경하시면 됩니다 */
 }
+
+/* 마크다운 내 이미지들이 본문 너비를 넘어가지 않게 자동 조절 */
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	/* 덤으로 모서리를 둥글게 만들어 줍니다 */
+}

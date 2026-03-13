@@ -11,7 +11,7 @@ const posts = (await getCollection('blog')).sort(
 );
 
 // 카테고리 목록 추출
-const categories = ['STAR KEEPER', 'MENTIST', 'CODING', 'MATH'];
+const categories = ['STAR KEEPER', 'MENTIST', 'CODING'];
 const categoryCounts = categories.reduce((acc, cat) => {
 	acc[cat] = posts.filter((p) => p.data.category === cat).length;
 	return acc;
