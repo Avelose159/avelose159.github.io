@@ -10,7 +10,7 @@ boolean 변수 x1, x2, x3, x4가 매개변수로 주어질 때, 다음의 식의
 
 (x1 ∨ x2) ∧ (x3 ∨ x4)<br><br>
 ```∨ = || ∧ = &&```
-```c++
+```cpp
 #include <string>
 #include <vector>
 
@@ -31,7 +31,7 @@ bool solution(bool x1, bool x2, bool x3, bool x4) {
 어느 두 주사위에서 나온 숫자가 p로 같고 나머지 두 주사위에서 나온 숫자가 각각 p와 다른 q, r(q ≠ r)이라면 q × r점을 얻습니다.
 네 주사위에 적힌 숫자가 모두 다르다면 나온 숫자 중 가장 작은 숫자 만큼의 점수를 얻습니다.
 네 주사위를 굴렸을 때 나온 숫자가 정수 매개변수 a, b, c, d로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요
-```c++
+```cpp
 #include <cmath>
 #include <algorithm>
 
@@ -67,7 +67,7 @@ int solution(int a, int b, int c, int d) {
     return min({a, b, c, d});
 }
 ```
-```c++
+```cpp
 #include <vector>
 #include <algorithm>
 #include <cmath>
@@ -119,7 +119,7 @@ int solution(int a, int b, int c, int d) {
 ```
 #### 3. 글자 이어 붙여 문자열 만들기
  문자열 my_string과 정수 배열 index_list가 매개변수로 주어집니다. my_string의 index_list의 원소들에 해당하는 인덱스의 글자들을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
-```c++
+```cpp
 #include <string>
 #include <vector>
 
@@ -138,7 +138,7 @@ string solution(string my_string, vector<int> index_list) {
 #### 4. 9로 나눈 나머지
  음이 아닌 정수를 9로 나눈 나머지는 그 정수의 각 자리 숫자의 합을 9로 나눈 나머지와 같은 것이 알려져 있습니다.
  이 사실을 이용하여 음이 아닌 정수가 문자열 number로 주어질 때, 이 정수를 9로 나눈 나머지를 return 하는 solution 함수를 작성해주세요.
-```c++
+```cpp
 #include <string>
 #include <vector>
 
@@ -156,7 +156,7 @@ int solution(string number) {
 ```
 #### 5. 문자열 여러 번 뒤집기
  문자열 my_string과 이차원 정수 배열 queries가 매개변수로 주어집니다. queries의 원소는 [s, e] 형태로, my_string의 인덱스 s부터 인덱스 e까지를 뒤집으라는 의미입니다. my_string에 queries의 명령을 순서대로 처리한 후의 문자열을 return 하는 solution 함수를 작성해 주세요.
-```c++
+```cpp
 #include <string>
 #include <vector>
 #include <algorithm>

@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const categories = ['STAR KEEPER', 'MENTIST', 'CODING'];
+const categoryCounts = categories.reduce((acc: Record<string, number>, cat) => {
+	acc[cat] = posts.filter((p) => p.data.category === cat).length;
+	return acc;
+}, {});
+
+const { activePostId } = Astro.props;
+
+// Find which category is active based on activePostId
+let activeCategory = categories[0];
+if (activePostId) {
+    const activePost = posts.find((p: any) => p.id === activePostId || p.slug === activePostId);
+    if (activePost && activePost.data.category) {
+        activeCategory = activePost.data.category;
+    }
+}
+---
+
+<aside class="sidebar">
+    <h3>📂 카테고리</h3>
+    <ul class="cat-list">
+        {categories.map((cat) => {
+            const catPosts = posts.filter((p: any) => p.data.category === cat);
+            const isActiveCat = cat === activeCategory;
+            return (
+                <li class="cat-item">
+                    <button class={`category-btn ${isActiveCat ? 'active' : ''}`} data-category={cat}>
+                        {cat} ({categoryCounts[cat] || 0})
+                        <span class="toggle-icon">{isActiveCat ? '▲' : '▼'}</span>
+                    </button>
+                    <ul class={`post-list ${isActiveCat ? 'expanded' : ''}`}>
+                        {catPosts.map((post: any) => {
+                            // Astro 3/4 id or slug compatibility
+                            const ident = post.id || post.slug;
+                            const isActivePost = ident === activePostId;
+                            return (
+                                <li>
+                                    <a href={`/blog/${ident}/`} class={`post-link ${isActivePost ? 'active-post' : ''}`}>
+                                        {post.data.title}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </li>
+            );
+        })}
+    </ul>
+</aside>
+
+<style>
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 8rem;
+    align-self: flex-start;
+}
+.sidebar h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.05em;
+}
+.sidebar .cat-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.sidebar .cat-item {
+    display: flex;
+    flex-direction: column;
+}
+.category-btn {
+    width: 100%;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.category-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+.category-btn.active {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+.toggle-icon {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+.post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.5rem;
+    padding-left: 0.2rem;
+}
+.post-list.expanded {
+    display: flex;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.post-list li a {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    line-height: 1.4;
+}
+.post-list li a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+}
+.post-list li a.active-post {
+    color: #fff;
+    font-weight: 600;
+    border-left: 2px solid #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+    .sidebar { width: 100%; position: static; }
+}
+</style>
+
+<script is:inline>
+    // 아코디언 동작 스크립트
+    // 페이지 로드 시 혹은 Astro ViewTransitions 지원 시 초기화
+    function initSidebar() {
+        const buttons = document.querySelectorAll('.category-btn');
+        if (!buttons.length) return;
+
+        // 기존 이벤트 리스너 중복 방지를 위해 삭제 후 등록은 필요하지만 
+        // Astro 기본 렌더링에서는 로드 시 1회만 실행됨
+        buttons.forEach(btn => {
+            // 중복 실행 방지
+            if(btn.dataset.initialized) return;
+            btn.dataset.initialized = 'true';
+
+            btn.addEventListener('click', function() {
+                const isExpanded = this.classList.contains('active');
+                
+                // 기존 열린 아코디언 닫기
+                buttons.forEach(b => {
+                    b.classList.remove('active');
+                    const icon = b.querySelector('.toggle-icon');
+                    if(icon) icon.textContent = '▼';
+                    const list = b.nextElementSibling;
+                    if(list && list.classList.contains('post-list')) {
+                        list.classList.remove('expanded');
+                    }
+                });
+
+                if (!isExpanded) {
+                    this.classList.add('active');
+                    const icon = this.querySelector('.toggle-icon');
+                    if(icon) icon.textContent = '▲';
+                    const list = this.nextElementSibling;
+                    if(list && list.classList.contains('post-list')) {
+                        list.classList.add('expanded');
+                    }
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initSidebar);
+    document.addEventListener('astro:page-load', initSidebar); // Astro 뷰 트랜지션 고려
+</script>

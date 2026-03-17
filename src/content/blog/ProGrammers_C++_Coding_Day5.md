@@ -19,7 +19,7 @@ author: "avelose159"
 ##### 문자열 code를 통해 만들어진 문자열 ret를 return 하는 solution 함수를 완성해 주세요.
 
 ##### 단, 시작할 때 mode는 0이며, return 하려는 ret가 만약 빈 문자열이라면 대신 "EMPTY"를 return 합니다.
-```csharp
+```cpp
 #include <string>
 #include <vector>
 
@@ -38,7 +38,7 @@ string solution(string code) {
 ```
 #### 2. 등차수열의 특정한 항만 더하기
 ##### 두 정수 a, d와 길이가 n인 boolean 배열 included가 주어집니다. 첫째항이 a, 공차가 d인 등차수열에서 included[i]가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 included가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.
-```csharp
+```cpp
 #include <string>
 #include <vector>
 
@@ -62,7 +62,7 @@ int solution(int a, int d, vector<bool> included) {
 * 세 숫자 중 어느 두 숫자는 같고 나머지 다른 숫자는 다르다면 (a + b + c) × (a2 + b2 + c2 )점을 얻습니다.
 * 세 숫자가 모두 같다면 (a + b + c) × (a2 + b2 + c2 ) × (a3 + b3 + c3 )점을 얻습니다.
 * 세 정수 a, b, c가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
-```csharp
+```cpp
 #include <string>
 #include <vector>
 
@@ -82,7 +82,7 @@ int solution(int a, int b, int c) {
 ```
 #### 4. 원소들의 곱과 합
 ##### 정수가 담긴 리스트 num_list가 주어질 때, 모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을 크면 0을 return하도록 solution 함수를 완성해주세요.
-```csharp
+```cpp
 #include <string>
 #include <vector>
 
@@ -101,7 +101,7 @@ int solution(vector<int> num_list) {
 ```
 #### 5. 이어 붙인 수
 ##### 정수가 담긴 리스트 num_list가 주어집니다. num_list의 홀수만 순서대로 이어 붙인 수와 짝수만 순서대로 이어 붙인 수의 합을 return하도록 solution 함수를 완성해주세요.
-```csharp
+```cpp
 #include <string>
 #include <vector>
 
