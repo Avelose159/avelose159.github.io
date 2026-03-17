@@ -22,6 +22,9 @@ bool solution(bool x1, bool x2, bool x3, bool x4) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 2. 주사위 게임 3
 1부터 6까지 숫자가 적힌 주사위가 네 개 있습니다. 네 주사위를 굴렸을 때 나온 숫자에 따라 다음과 같은 점수를 얻습니다.
 
@@ -117,6 +120,9 @@ int solution(int a, int b, int c, int d) {
     return v[0];
 }
 ```
+---
+<br>
+
 #### 3. 글자 이어 붙여 문자열 만들기
  문자열 my_string과 정수 배열 index_list가 매개변수로 주어집니다. my_string의 index_list의 원소들에 해당하는 인덱스의 글자들을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 ```cpp
@@ -135,6 +141,9 @@ string solution(string my_string, vector<int> index_list) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 4. 9로 나눈 나머지
  음이 아닌 정수를 9로 나눈 나머지는 그 정수의 각 자리 숫자의 합을 9로 나눈 나머지와 같은 것이 알려져 있습니다.
  이 사실을 이용하여 음이 아닌 정수가 문자열 number로 주어질 때, 이 정수를 9로 나눈 나머지를 return 하는 solution 함수를 작성해주세요.
@@ -154,6 +163,9 @@ int solution(string number) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 5. 문자열 여러 번 뒤집기
  문자열 my_string과 이차원 정수 배열 queries가 매개변수로 주어집니다. queries의 원소는 [s, e] 형태로, my_string의 인덱스 s부터 인덱스 e까지를 뒤집으라는 의미입니다. my_string에 queries의 명령을 순서대로 처리한 후의 문자열을 return 하는 solution 함수를 작성해 주세요.
 ```cpp

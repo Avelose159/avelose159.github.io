@@ -28,6 +28,9 @@ vector<int> solution(vector<string> intStrs, int k, int s, int l) {
     return temp;
 }
 ```
+---
+<br>
+
 #### 2. 부분 문자열 이어 붙여 문자열 만들기
 길이가 같은 문자열 배열 my_strings와 이차원 정수 배열 parts가 매개변수로 주어집니다. parts[i]는 [s, e] 형태로, my_string[i]의 인덱스 s부터 인덱스 e까지의 부분 문자열을 의미합니다. 각 my_strings의 원소의 parts에 해당하는 부분 문자열을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 ```cpp
@@ -48,6 +51,9 @@ string solution(vector<string> my_strings, vector<vector<int>> parts) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 3. 문자열 뒤의 n 글자
 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string의 뒤의 n글자로 이루어진 문자열을 return 하는 solution 함수를 작성해 주세요.
 ```cpp
@@ -62,6 +68,9 @@ string solution(string my_string, int n) {
     return my_string.substr(temp);
 }
 ```
+---
+<br>
+
 #### 4. 접미사 배열
 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다.
 문자열 my_string이 매개변수로 주어질 때, my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
@@ -82,6 +91,9 @@ vector<string> solution(string my_string) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 5. 접미사인지 확인하기
 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다.
 문자열 my_string과 is_suffix가 주어질 때, is_suffix가 my_string의 접미사라면 1을, 아니면 0을 return 하는 solution 함수를 작성해 주세요.

@@ -30,6 +30,9 @@ vector<int> solution(vector<int> arr, vector<vector<int>> queries) {
     return arr;
 }
 ```
+---
+<br>
+
 #### 2. 배열 만들기 2
 정수 l과 r이 주어졌을 때, l 이상 r이하의 정수 중에서 숫자 "0"과 "5"로만 이루어진 모든 정수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.
 
@@ -58,6 +61,9 @@ vector<int> solution(int l, int r) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 3. 카운트 업
  정수 start_num와 end_num가 주어질 때, start_num부터 end_num까지의 숫자를 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 ```cpp
@@ -74,6 +80,9 @@ vector<int> solution(int start_num, int end_num) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 4. 콜라츠 수열 만들기
  모든 자연수 x에 대해서 현재 값이 x이면 x가 짝수일 때는 2로 나누고, x가 홀수일 때는 3 * x + 1로 바꾸는 계산을 계속해서 반복하면 언젠가는 반드시 x가 1이 되는지 묻는 문제를 콜라츠 문제라고 부릅니다.
 
@@ -99,6 +108,9 @@ vector<int> solution(int n) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 5. 배열 만들기 4
  정수 배열 arr가 주어집니다. arr를 이용해 새로운 배열 stk를 만드려고 합니다.
 

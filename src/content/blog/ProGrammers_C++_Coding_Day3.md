@@ -24,6 +24,9 @@ string solution(string str1, string str2) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 2. 문자 리스트를 문자열로 변환하기
 ##### 문자들이 담겨있는 배열 arr가 주어집니다. arr의 원소들을 순서대로 이어 붙인 문자열을 return 하는 solution함수를 작성해 주세요.
 ```cpp
@@ -40,6 +43,9 @@ string solution(vector<string> arr) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 3. 문자열 곱하기
 ##### 문자열 my_string과 정수 k가 주어질 때, my_string을 k번 반복한 문자열을 return 하는 solution 함수를 작성해 주세요.
 ```cpp
@@ -56,6 +62,9 @@ string solution(string my_string, int k) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 4. 더 크게 합치기
 ##### 연산 ⊕는 두 정수에 대한 연산으로 두 정수를 붙여서 쓴 값을 반환합니다. 예를 들면 다음과 같습니다.
 ```12 ⊕ 3 = 123```
@@ -77,6 +86,9 @@ int solution(int a, int b) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 5. 두 수의 연산값 비교하기
 ##### 연산 ⊕는 두 정수에 대한 연산으로 두 정수를 붙여서 쓴 값을 반환합니다. 예를 들면 다음과 같습니다.
 ```12 ⊕ 3 = 123```

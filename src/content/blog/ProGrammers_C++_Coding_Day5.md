@@ -36,6 +36,9 @@ string solution(string code) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 2. 등차수열의 특정한 항만 더하기
 ##### 두 정수 a, d와 길이가 n인 boolean 배열 included가 주어집니다. 첫째항이 a, 공차가 d인 등차수열에서 included[i]가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 included가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.
 ```cpp
@@ -56,6 +59,9 @@ int solution(int a, int d, vector<bool> included) {
     return answer;
 }   
 ```
+---
+<br>
+
 #### 3. 주사위 게임 2
 ##### 1부터 6까지 숫자가 적힌 주사위가 세 개 있습니다. 세 주사위를 굴렸을 때 나온 숫자를 각각 a, b, c라고 했을 때 얻는 점수는 다음과 같습니다.
 * 세 숫자가 모두 다르다면 a + b + c 점을 얻습니다.
@@ -80,6 +86,9 @@ int solution(int a, int b, int c) {
     return answer;
 }
 ```
+---
+<br>
+
 #### 4. 원소들의 곱과 합
 ##### 정수가 담긴 리스트 num_list가 주어질 때, 모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을 크면 0을 return하도록 solution 함수를 완성해주세요.
 ```cpp
@@ -99,6 +108,9 @@ int solution(vector<int> num_list) {
     return mul<sum;
 }
 ```
+---
+<br>
+
 #### 5. 이어 붙인 수
 ##### 정수가 담긴 리스트 num_list가 주어집니다. num_list의 홀수만 순서대로 이어 붙인 수와 짝수만 순서대로 이어 붙인 수의 합을 return하도록 solution 함수를 완성해주세요.
 ```cpp
