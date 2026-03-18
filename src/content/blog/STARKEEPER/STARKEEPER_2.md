@@ -35,7 +35,7 @@ author: "avelose159"
 
 <div align="center">
 
-![Geometry](../photo/2_Geometry.jpg)
+![Geometry](../../photo/2_Geometry.jpg)
 <br>▲참고했던 기하학 도형들
 
 </div>

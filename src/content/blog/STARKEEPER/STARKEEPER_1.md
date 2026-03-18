@@ -22,7 +22,7 @@ author: "avelose159"
 
 <div align="center">
 
-![Mini Motorways](../photo/1.Mini%20Motorways.jpg)
+![Mini Motorways](../../photo/1.Mini%20Motorways.jpg)
 <br>▲ Mini Motorways 인게임 사진
 
 </div>
@@ -46,7 +46,7 @@ author: "avelose159"
 물론 그래픽 디자인도 정말 별로였다.（ 디자인은 처음이고、초짜니까 그럴 수 있지.. ）
 <div align="center">
 
-![LINECRAFT](../photo/1_LINECRAFT.png)
+![LINECRAFT](../../photo/1_LINECRAFT.png)
 <br>▲ 제작했던 LINECRAFT 인게임 사진 ( 진짜 디자인 이게맞니...? )
 
 </div>

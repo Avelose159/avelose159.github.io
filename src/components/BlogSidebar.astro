@@ -5,7 +5,7 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const categories = ['STAR KEEPER', 'MENTIST', 'CODING'];
+const categories = ['STAR KEEPER', 'MENTIST', 'CODING', 'MATH'];
 const categoryCounts = categories.reduce((acc: Record<string, number>, cat) => {
 	acc[cat] = posts.filter((p) => p.data.category === cat).length;
 	return acc;
