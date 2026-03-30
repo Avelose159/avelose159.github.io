@@ -1,7 +1,7 @@
 ---
-title: "프로그래머스 C++ 코딩 19일차"
-pubDate: 2026-03-26
-description: "프로그래머스 C++ 코딩 19일차"
+title: "프로그래머스 C++ 코딩 20일차"
+pubDate: 2026-03-27
+description: "프로그래머스 C++ 코딩 20일차"
 category: "CODING"
 author: "avelose159"
 ---

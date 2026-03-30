@@ -1,5 +1,5 @@
 ---
-title: "STAR KEEPER 개발 일지 #06: 핵심 GameLoop 제작하기"
+title: "STAR KEEPER 개발 일지 #05: 핵심 GameLoop 제작하기"
 pubDate: 2026-03-25
 description: "우주의 끊어진 신경망을 다시 연결하는 감성 물류 퍼즐, STAR KEEPER의 기획과 시작을 기록합니다."
 category: "STAR KEEPER"
@@ -77,3 +77,11 @@ public void ActivateStar()
 }
 ```
 
+별 모양 스프라이트를 이쁘게 다시 만들어 보았다!
+
+![New_Star](../../photo/6.STARKEEPER_New_Star.png)
+<br> ▲ 에너지 빔 연결완료!
+
+오늘은 여기까지 하고 내일 새로운 기획을 해보기로 했다.
+
+다음에 계속..

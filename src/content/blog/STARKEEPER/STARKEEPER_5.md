@@ -1,5 +1,5 @@
 ---
-title: "STAR KEEPER 개발 일지 #05: WorldMap System 재구성"
+title: "STAR KEEPER 개발 일지 #04: WorldMap System 구성"
 pubDate: 2026-03-23
 description: "우주의 끊어진 신경망을 다시 연결하는 감성 물류 퍼즐, STAR KEEPER의 기획과 시작을 기록합니다."
 category: "STAR KEEPER"
