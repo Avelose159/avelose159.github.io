@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Space Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 3D 렌더링 영역 -->
+    <canvas id="bg"></canvas>
+
+    <!-- 클릭 시 나타날 콘텐츠 레이어 -->
+    <div id="content-overlay" class="hidden">
+        <button id="close-btn">X</button>
+        <div id="blog-post">
+            <h1 id="post-title"></h1>
+            <div id="post-body"></div>
+        </div>
+    </div>
+
+    <!-- 라이브러리 로드 (CDN) -->
+    <!-- 기존 CDN 스크립트 삭제 후 이것만 남기기 -->
+    <script type="module" src="/main.js"></script>
+</body>
+
+</html>

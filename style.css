@@ -1,0 +1,404 @@
+/* ==========================================
+   1. 기본 환경 및 우주 배경
+   ========================================== */
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+    background-color: #000;
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* ==========================================
+   2. 메인 오버레이 (대시보드 팝업)
+   ========================================== */
+#content-overlay {
+    position: fixed;
+    top: 30px;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+    background: rgba(15, 15, 15, 0.95);
+    color: #e0e0e0;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+#content-overlay.hidden {
+    transform: scale(0.98) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#blog-post {
+    padding: 40px;
+    flex-grow: 1;
+}
+
+#post-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 800;
+    color: #fff;
+}
+
+/* ==========================================
+   3. 상단 통계 바 및 그래프 정렬
+   ========================================== */
+.stats-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.5fr 0.5fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.stat-card h4 {
+    margin: 0 0 15px 0;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.chart-wrapper {
+    display: flex;
+    height: 140px;
+}
+
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10px;
+    font-size: 0.65rem;
+    color: #666;
+    width: 35px;
+    padding-bottom: 20px;
+    /* X축 높이만큼 보정 */
+    text-align: right;
+}
+
+.chart-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 100px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* 25% 단위 가이드라인 */
+    background: linear-gradient(to top, transparent 24.5%, rgba(255, 255, 255, 0.03) 25%, transparent 25.5%) repeat-y;
+    background-size: 100% 25%;
+}
+
+.bar {
+    background: #76a379;
+    flex: 1;
+    border-radius: 2px 2px 0 0;
+    transition: height 0.3s ease;
+}
+
+/* X축 날짜/주차 중앙 정렬[cite: 4] */
+.x-axis {
+    display: flex;
+    gap: 4px;
+    /* .bar-chart의 gap과 동일하게 설정 */
+    font-size: 0.6rem;
+    color: #666;
+    padding-top: 5px;
+}
+
+.x-axis span {
+    flex: 1;
+    /* .bar의 flex: 1과 동일하게 설정하여 정중앙 위치 보장 */
+    text-align: center;
+}
+
+/* ==========================================
+   4. 해빗 트래커 메인 그리드[cite: 4]
+   ========================================== */
+.main-grid {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/* 4-1. 왼쪽 사이드바 (너비 최적화) */
+.habit-sidebar {
+    width: 160px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-info {
+    height: 60px;
+    /* Week(30) + DayNames(30) 합 */
+    padding: 10px 15px;
+    background: rgba(118, 163, 121, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+
+.year-label {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.month-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #76a379;
+}
+
+.sidebar-header {
+    height: 40px;
+    /* DayNumbers(40)와 동기화 */
+    line-height: 40px;
+    padding: 0 15px;
+    font-weight: bold;
+    color: #76a379;
+    border-bottom: 1px solid #444;
+}
+
+.habit-name-item {
+    height: 34px;
+    /* 데이터 행 높이 고정 */
+    line-height: 34px;
+    padding: 0 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.habit-name-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete-habit-btn {
+    background: none;
+    border: none;
+    color: #ff5555;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 1.1rem;
+}
+
+.habit-name-item:hover .delete-habit-btn {
+    opacity: 1;
+}
+
+/* 4-2. 중앙 체크박스 그리드 */
+.checkbox-grid-wrapper {
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grid-header-row,
+.grid-check-row {
+    display: grid;
+    grid-template-columns: repeat(31, 34px);
+    width: fit-content;
+}
+
+.week-row {
+    height: 30px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.day-names-row {
+    height: 30px;
+}
+
+.day-numbers-row {
+    height: 40px;
+    border-bottom: 1px solid #444;
+}
+
+.grid-cell {
+    width: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.grid-cell.label {
+    font-size: 0.65rem;
+    color: #888;
+}
+
+.grid-cell.num {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.week-cell {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 0.7rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grid-check-row {
+    height: 34px;
+}
+
+.grid-cell.check {
+    height: 34px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.grid-cell.check::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.grid-cell.check.checked::before {
+    content: '✓';
+    background: #76a379;
+    border-color: #76a379;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 4-3. 오른쪽 Analysis 패널[cite: 4] */
+.habit-analysis {
+    width: 280px;
+    flex-shrink: 0;
+    background: rgba(20, 20, 20, 0.5);
+}
+
+.analysis-header-top {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analysis-header-sub {
+    height: 40px;
+    line-height: 40px;
+    display: grid;
+    grid-template-columns: 40px 45px 40px 1fr;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+}
+
+.analysis-row {
+    height: 34px;
+    line-height: 34px;
+    display: grid;
+    grid-template-columns: 40px 45px 40px 1fr;
+    text-align: center;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.analysis-progress-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.a-bar-bg {
+    flex-grow: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.a-bar-fill {
+    height: 100%;
+    background: #76a379;
+    transition: width 0.3s ease;
+}
+
+.a-percent-text {
+    width: 30px;
+    font-size: 0.7rem;
+    text-align: right;
+}
+
+/* ==========================================
+   5. 기타 UI 컨트롤
+   ========================================== */
+.add-habit-btn {
+    margin-top: 24px;
+    background: transparent;
+    color: #76a379;
+    border: 1px dashed #76a379;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+}
+
+#close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
